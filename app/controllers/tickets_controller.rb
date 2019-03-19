@@ -16,17 +16,17 @@ class TicketsController < ApplicationController
   end
 
   # GET: /tickets/5
-  get "/tickets/:id" do
-    erb :"/tickets/show.html"
+  get "/tickets/:slug" do
+    erb :"/tickets/show"
   end
 
   # GET: /tickets/5/edit
-  get "/tickets/:id/edit" do
+  get "/tickets/:slug/edit" do
     erb :"/tickets/edit.html"
   end
 
   # PATCH: /tickets/5
-  patch "/tickets/:id" do
+  patch "/tickets/:slug" do
     redirect "/tickets/:id"
   end
 
