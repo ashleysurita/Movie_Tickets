@@ -15,6 +15,12 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <header class='nav_bar'>
+        <a href='/tickets' class='head_link' id='homepg'>Tickets Homepage</a>
+        <a href='/logout' class='head_link'>Log Out</a>
+      </header>
+    <%end%>
     <div class="wrapper">
       <h1>Sinatra Movie Ticket Manager</h1>
         <%= yield %>
