@@ -1,37 +1,34 @@
 class UsersController < ApplicationController
 
-  # GET: /users
-  get "/users" do
-    erb :"/users/index.html"
+  get '/login' do
+    erb :"sessions/login"
   end
 
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/new.html"
-  end
+  post '/login' do
+      @user = User.find_by(:username => params[:username], :password => params[:password])
+      if @user
+        reidrect '/tickets/index'
+      else
+        redirect '/login'
+      end
+    end
 
-  # POST: /users
-  post "/users" do
-    redirect "/users"
-  end
+    get '/signup' do
+      erb :'sessions/signup'
+    end
 
-  # GET: /users/5
-  get "/users/:id" do
-    erb :"/users/show.html"
-  end
+    post '/signup' do
+      # take username and see if it exists in the db
+      @user = User.find_by(:username => params[:username])
+      #if exists? redirect to login
+      if @user
+          redirect '/login'
+      #if doesnt exist, create a user and redirect to the tickets index page
+      else
+        @user = User.create(params)
+        session[:user_id] = @user.id
+        redirect '/tickets/index'
+      end
+    end
 
-  # GET: /users/5/edit
-  get "/users/:id/edit" do
-    erb :"/users/edit.html"
-  end
-
-  # PATCH: /users/5
-  patch "/users/:id" do
-    redirect "/users/:id"
-  end
-
-  # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
-    redirect "/users"
-  end
 end
