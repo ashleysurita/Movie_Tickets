@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      redirect '/tweets/index'
+      redirect '/tickets'
     else
       erb :'users/signup'
     end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     if logged_in?
-      redirect '/tickets/index'
+      redirect '/tickets'
     else
       erb :"users/login"
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect '/tickets/index'
+      redirect '/tickets'
     else
       redirect '/login'
     end
