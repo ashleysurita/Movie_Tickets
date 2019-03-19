@@ -1,5 +1,20 @@
 class UsersController < ApplicationController
 
+  get '/signup' do
+    erb :'users/signup'
+  end
+
+  post '/signup' do
+    @user = User.find_by(:username => params[:username])
+    if @user
+        redirect '/login'
+    else
+      @user = User.create(params)
+      session[:user_id] = @user.id
+      redirect '/tickets/index'
+    end
+  end
+
   get '/login' do
     erb :"users/login"
   end
@@ -13,22 +28,5 @@ class UsersController < ApplicationController
       end
     end
 
-    get '/signup' do
-      erb :'users/signup'
-    end
-
-    post '/signup' do
-      # take username and see if it exists in the db
-      @user = User.find_by(:username => params[:username])
-      #if exists? redirect to login
-      if @user
-          redirect '/login'
-      #if doesnt exist, create a user and redirect to the tickets index page
-      else
-        @user = User.create(params)
-        session[:user_id] = @user.id
-        redirect '/tickets/index'
-      end
-    end
 
 end
