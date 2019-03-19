@@ -19,17 +19,30 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :"users/login"
+    if logged_in?
+      redirect '/tickets/index'
+    else
+      erb :"users/login"
+    end
   end
 
   post '/login' do
-      @user = User.find_by(:username => params[:username], :password => params[:password])
-      if @user
-        reidrect '/tickets/index'
-      else
-        redirect '/login'
-      end
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect '/tickets/index'
+    else
+      redirect '/login'
     end
+  end
 
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
+  end
 
 end
