@@ -1,11 +1,10 @@
 class TicketsController < ApplicationController
 
-  # GET: /tickets
   get "/tickets" do
+    @tickets = Ticket.find_by(:user_id => session[:user_id])
     erb :"/tickets/index"
   end
 
-  # GET: /tickets/new
   get "/tickets/new" do
     erb :"/tickets/new.html"
   end
