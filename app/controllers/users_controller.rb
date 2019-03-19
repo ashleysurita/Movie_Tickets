@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(params)
       session[:user_id] = @user.id
-      redirect '/tickets/index'
+      redirect '/tickets'
     end
   end
 
