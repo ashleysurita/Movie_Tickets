@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
 
   get "/tickets" do
     @user = User.find(session[:user_id])
-    @tickets = Ticket.all
+    @tickets = current_user.tickets #current_user.tickets (show tickets by that user)
     erb :"/tickets/index"
   end
 
@@ -25,7 +25,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  get "/tickets/:id" do
+  get "/tickets/:id" do #seeing single ticket by their id
     erb :"/tickets/show"
   end
 
