@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
 
   get "/tickets" do
     @user = User.find(session[:user_id])
-    @tickets = Ticket.find_by(:user_id => session[:user_id])
+    @tickets = Ticket.all
     erb :"/tickets/index"
   end
 
@@ -14,23 +14,28 @@ class TicketsController < ApplicationController
     end
   end
 
-  # POST: /tickets
   post "/tickets" do
-    redirect "/tickets"
+    if Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater])
+      redirect "/tickets"
+    else
+      ticket = Ticket.new(params)
+      ticket.user_id = session[:user_id]
+      ticket.save
+      redirect '/tickets/:id/'
+    end
   end
 
-  # GET: /tickets/5
-  get "/tickets/:slug" do
+  get "/tickets/:id" do
     erb :"/tickets/show"
   end
 
   # GET: /tickets/5/edit
-  get "/tickets/:slug/edit" do
+  get "/tickets/:id/edit" do
     erb :"/tickets/edit.html"
   end
 
   # PATCH: /tickets/5
-  patch "/tickets/:slug" do
+  patch "/tickets/:id" do
     redirect "/tickets/:id"
   end
 
