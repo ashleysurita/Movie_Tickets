@@ -1,12 +1,12 @@
 class TicketsController < ApplicationController
 
-  get "/tickets" do
+  get "/tickets" do #ticket homepage
     @user = User.find(session[:user_id])
-    @tickets = current_user.tickets #current_user.tickets (show tickets by that user)
+    @tickets = current_user.tickets
     erb :"/tickets/index"
   end
 
-  get "/tickets/new" do
+  get "/tickets/new" do #see form to create new ticket
     if logged_in?
       erb :"/tickets/new"
     else
@@ -21,17 +21,18 @@ class TicketsController < ApplicationController
       ticket = Ticket.new(params)
       ticket.user_id = session[:user_id]
       ticket.save
-      redirect '/tickets/:id/'
+      redirect "/tickets/#{ticket.id}"
     end
   end
 
   get "/tickets/:id" do #seeing single ticket by their id
+    @ticket = Ticket.find(params[:id])
     erb :"/tickets/show"
   end
 
   # GET: /tickets/5/edit
   get "/tickets/:id/edit" do
-    erb :"/tickets/edit.html"
+    erb :"/tickets/edit"
   end
 
   # PATCH: /tickets/5
