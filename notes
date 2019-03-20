@@ -1,0 +1,9 @@
+<ul>
+  <% @tickets.each do |ticket| %>
+    <li>
+      Movie Name: <%=ticket.movie_name%>
+      Date: <%=ticket.date%>
+      Movie Theater: <%=ticket.movie_theater%>
+    </li>
+  <%end%>
+</ul>
