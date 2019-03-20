@@ -2,15 +2,19 @@
 
 <a href='/tickets/new'>Create New Ticket</a>
 
-<h3>Welcome <%= @user.username %></h3>
+<h3>Welcome <%= @user.username.capitalize %></h3>
 
 <h4 class='list'>Your Tickets:</h4>
+<br>
   <ul>
     <% @tickets.each do |ticket| %>
       <li>
-        Movie Name: <%=ticket.movie_name%>
-        Date: <%=ticket.date%>
-        Movie Theater: <%=ticket.movie_theater%>
+        <b>Movie Name:</b> <%=ticket.movie_name%>
+        <br>
+        <b>Date:</b> <%=ticket.date%>
+        <br>
+        <b>Movie Theater:</b> <%=ticket.movie_theater%>
       </li>
+      <br>
     <%end%>
   </ul>
