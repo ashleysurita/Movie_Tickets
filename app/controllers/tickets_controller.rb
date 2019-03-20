@@ -1,12 +1,17 @@
 class TicketsController < ApplicationController
 
   get "/tickets" do
+    @user = User.find(session[:user_id])
     @tickets = Ticket.find_by(:user_id => session[:user_id])
     erb :"/tickets/index"
   end
 
   get "/tickets/new" do
-    erb :"/tickets/new.html"
+    if logged_in?
+      erb :"/tickets/new"
+    else
+      redirect '/welcome'
+    end
   end
 
   # POST: /tickets
