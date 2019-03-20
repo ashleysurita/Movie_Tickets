@@ -1,1 +1,16 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h2>Ticket for <i><%=@ticket.movie_name%></i></h2>
+
+<p><b>Movie Date: </b> <%=@ticket.date%></p>
+<p><b>Movie Theater:</b> <%=@ticket.movie_theater%></p>
+
+<br>
+
+<form method="get" action="/tickets/<%= @ticket.id %>/edit"> 
+  <input id="hidden" type="hidden" name="_method" value="EDIT"> 
+  <input id='Delete Tweet' name='Edit Tweet' type="submit" value="Edit Ticket"> 
+</form> 
+
+<form method="post" action="/tickets/<%= @ticket.id %>"> 
+  <input id="hidden" type="hidden" name="_method" value="DELETE"> 
+  <input id='delete' name='delete' type="submit" value="Delete Ticket"> 
+</form> 
