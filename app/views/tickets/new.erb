@@ -1,1 +1,20 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h2>Create a new Movie Ticket</h2>
+
+<form action='/tickets' method='POST'>
+  <label>Movie Name: </label>
+    <input type='text' name='movie_name'>
+
+  <br><br>
+
+  <label>Date: </label>
+    <input type='date' name='date'>
+
+  <br><br>
+
+  <label>Movie Theater: </label>
+    <input type='text' name='movie_theater'>
+
+  <br><br>
+
+  <input type='submit' value='Create a new ticket'>
+</form>
