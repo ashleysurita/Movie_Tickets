@@ -15,7 +15,9 @@ class TicketsController < ApplicationController
   end
 
   post "/tickets" do
-    if Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater])
+    if params[:movie_name].empty? || params[:date].empty? || params[:movie_theater].empty?
+      redirect '/tickets/new'
+    elsif Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater])
       redirect "/tickets"
     else
       ticket = Ticket.new(params)
@@ -40,7 +42,9 @@ class TicketsController < ApplicationController
   end
 
   patch '/tickets/:id' do #patch route for specific ticket
-    if logged_in?
+    if params[:movie_name].empty? || params[:date].empty? || params[:movie_theater].empty?
+      redirect "/tickets/#{params[:id]}/edit"
+    elsif logged_in?
       @ticket = Ticket.find(params[:id])
       params.delete('_method')
       @ticket.update(params)
