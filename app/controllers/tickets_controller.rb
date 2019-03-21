@@ -39,9 +39,16 @@ class TicketsController < ApplicationController
     end
   end
 
-  # PATCH: /tickets/5
-  patch "/tickets/:id" do
-    redirect "/tickets/:id"
+  patch "/tickets/:id" do #patch route for specific ticket
+    binding.pry
+    if !logged_in?
+      redirect to '/login'
+    else
+      @ticket = Ticket.find(params[:id])
+      params.delete('_method')
+      @ticket.update(params)
+      redirect to "/tickets/#{@ticket.id}"
+    end
   end
 
   # DELETE: /tickets/5/delete
