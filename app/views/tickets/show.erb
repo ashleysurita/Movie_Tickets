@@ -5,12 +5,12 @@
 
 <br>
 
-<form method="get" action="/tickets/<%= @ticket.id %>/edit"> 
+<form id='button' method="get" action="/tickets/<%= @ticket.id %>/edit"> 
   <input id="hidden" type="hidden" name="_method" value="EDIT"> 
-  <input id='Delete Tweet' name='Edit Tweet' type="submit" value="Edit Ticket"> 
+  <input name='edit' type="submit" value="Edit Ticket"> 
 </form> 
 
-<form method="post" action="/tickets/<%= @ticket.id %>"> 
+<form id='button' method="post" action="/tickets/<%= @ticket.id %>"> 
   <input id="hidden" type="hidden" name="_method" value="DELETE"> 
-  <input id='delete' name='delete' type="submit" value="Delete Ticket"> 
+  <input name='delete' type="submit" value="Delete Ticket"> 
 </form> 
