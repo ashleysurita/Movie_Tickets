@@ -26,6 +26,10 @@
     padding: 10px;
   }
 
+  #button{
+    float: left;
+  }
+
   /* --- Welcome Page Styles --- */
   body {
     background-color: lightblue;
@@ -60,6 +64,10 @@
   h3 {
     font-size: 18px;
     line-height: 36px;
+  }
+
+  h4 {
+    text-decoration: underline;
   }
 
   p {
