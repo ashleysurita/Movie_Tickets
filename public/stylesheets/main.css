@@ -66,8 +66,8 @@
     line-height: 36px;
   }
 
-  h4 {
-    text-decoration: underline;
+  #create_link{
+    float: right;
   }
 
   p {

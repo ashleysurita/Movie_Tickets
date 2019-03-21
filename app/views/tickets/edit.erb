@@ -7,7 +7,7 @@
 
     <br><br>
     <label>Date: </label>
-      <input type='text' name='date' value='<%=@ticket.date%>'>
+      <input type='date' name='date' value='<%=@ticket.date%>'>
 
     <br><br>
 
@@ -16,11 +16,10 @@
 
     <br><br>
 
-    <input type='submit' value='Edit Ticket'>
-    
+    <input type='submit' value='Edit'>
+
     <form id='button' method="post" action="/tickets/<%= @ticket.id %>"> 
       <input id="hidden" type="hidden" name="_method" value="DELETE"> 
-      <input name='delete' type="submit" value="Delete Ticket"> 
+      <input name='delete' type="submit" value="Delete"> 
     </form> 
 </form>
-
