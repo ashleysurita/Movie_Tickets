@@ -2,8 +2,8 @@
 
 <a href='/tickets/new'>Create New Ticket</a>
 
-<h3>Welcome <%= @user.username.capitalize %></h3>
-
+<h3>Welcome <%= @user.username.capitalize %>!</h3>
+<br>
 <h4 class='list'>Your Tickets:</h4>
 <br>
   <ul>
@@ -15,6 +15,16 @@
         <br>
         <b>Movie Theater:</b> <%=ticket.movie_theater%>
       </li>
-      <br>
+
+      <form id='button' method="get" action="/tickets/<%= ticket.id %>"> 
+        <input id="hidden" type="hidden" name="_method" value="EDIT"> 
+        <input name='edit' type="submit" value="View Ticket"> 
+      </form> 
+
+      <form id='button' method="get" action="/tickets/<%= ticket.id %>/edit"> 
+        <input id="hidden" type="hidden" name="_method" value="EDIT"> 
+        <input name='edit' type="submit" value="Edit Ticket"> 
+      </form> 
+      <br><br><br>
     <%end%>
   </ul>
