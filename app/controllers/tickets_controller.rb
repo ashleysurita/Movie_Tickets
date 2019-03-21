@@ -29,19 +29,27 @@ class TicketsController < ApplicationController
 
   get "/tickets/:id" do #seeing single ticket by their id
     @ticket = Ticket.find(params[:id])
-    erb :"/tickets/show"
+    if !@ticket
+      redirect '/tickets'
+    elsif logged_in? && current_user.tickets.include?(@ticket)
+      erb :"/tickets/show"
+    else
+      redirect '/tickets'
+    end
   end
 
-  get "/tickets/:id/edit" do #edit specific ticket
-    if logged_in?
-      @ticket = Ticket.find(params[:id])
+  get "/tickets/:id/edit" do #edit form for specific ticket
+    @ticket = Ticket.find(params[:id])
+    if logged_in? && current_user.tickets.include?(@ticket)
       erb :"/tickets/edit"
+    elsif logged_in?
+      redirect '/tickets'
     else
       redirect '/login'
     end
   end
 
-  patch '/tickets/:id' do #patch route for specific ticket
+  patch '/tickets/:id' do #edit route for specific ticket
     if params[:movie_name].empty? || params[:date].empty? || params[:movie_theater].empty?
       redirect "/tickets/#{params[:id]}/edit"
     elsif logged_in?
