@@ -10,7 +10,7 @@ class TicketsController < ApplicationController
     if logged_in?
       erb :"/tickets/new"
     else
-      redirect '/welcome'
+      redirect '/login'
     end
   end
 
@@ -30,9 +30,13 @@ class TicketsController < ApplicationController
     erb :"/tickets/show"
   end
 
-  # GET: /tickets/5/edit
-  get "/tickets/:id/edit" do
-    erb :"/tickets/edit"
+  get "/tickets/:id/edit" do #edit specific ticket
+    if logged_in?
+      @ticket = Ticket.find(params[:id])
+      erb :"/tickets/edit"
+    else
+      redirect '/login'
+    end
   end
 
   # PATCH: /tickets/5
