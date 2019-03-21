@@ -3,7 +3,7 @@
 <form action='/tickets/<%=@ticket.id%>' method='POST'>
   <input id='hidden' type='hidden' name="_method" value='patch'>
     <label>Movie Name: </label>
-      <input type='text' name='movie_name' value='<%=@ticket.movie_name%>'>
+      <input type='text' name='movie_name' value="<%=@ticket.movie_name%>">
 
     <br><br>
     <label>Date: </label>
