@@ -25,6 +25,11 @@
         <input id="hidden" type="hidden" name="_method" value="EDIT"> 
         <input name='edit' type="submit" value="Edit Ticket"> 
       </form> 
+
+      <form id='button' method="post" action="/tickets/<%= ticket.id %>"> 
+        <input id="hidden" type="hidden" name="_method" value="DELETE"> 
+        <input name='delete' type="submit" value="Delete Ticket"> 
+      </form> 
       <br><br><br>
     <%end%>
   </ul>
