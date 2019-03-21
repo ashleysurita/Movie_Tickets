@@ -1,7 +1,7 @@
 <h2>Edit the <i><%=@ticket.movie_name%></i> ticket:</h2>
 
 <form action='/tickets/<%=@ticket.id%>' method='POST'>
-  <input id='hidden' type='hidden' name="_method" value="PATCH">
+  <input id='hidden' type='hidden' name="_method" value='patch'>
     <label>Movie Name: </label>
       <input type='text' name='movie_name' value='<%=@ticket.movie_name%>'>
 
@@ -17,4 +17,10 @@
     <br><br>
 
     <input type='submit' value='Edit Ticket'>
+    
+    <form id='button' method="post" action="/tickets/<%= @ticket.id %>"> 
+      <input id="hidden" type="hidden" name="_method" value="DELETE"> 
+      <input name='delete' type="submit" value="Delete Ticket"> 
+    </form> 
 </form>
+
