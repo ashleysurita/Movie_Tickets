@@ -40,7 +40,6 @@ class TicketsController < ApplicationController
   end
 
   patch "/tickets/:id" do #patch route for specific ticket
-    binding.pry
     if !logged_in?
       redirect to '/login'
     else
@@ -51,8 +50,16 @@ class TicketsController < ApplicationController
     end
   end
 
-  # DELETE: /tickets/5/delete
   delete "/tickets/:id/delete" do
-    redirect "/tickets"
+    ticket = Ticket.find(params[:id])
+    if logged_in? && current_user[:id] == ticket.user_id #check if user is logged_in and if the ticket belongs to user
+      ticket.delete
+      redirect '/tickets'
+    elsif logged_in? #if user is only logged_in but ticket doesn't belong to user
+      redirect '/tickets'
+    else #if user is not logged in
+      redirect "/login"
+    end
   end
+
 end
