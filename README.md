@@ -2,7 +2,7 @@
 # Sinatra Movie Tickets App
 A sinatra app where users can view, create, edit, and delete their own movie tickets.
 
-# Getting started
+## Getting started
 To run this app, clone the repo and run `bundle install`. 
 Then run `shotgun` to fire up a server. 
 You should see the app running on `localhost:9393`.
