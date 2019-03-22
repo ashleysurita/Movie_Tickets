@@ -34,7 +34,7 @@ class TicketsController < ApplicationController
   get "/tickets/:id" do #seeing single ticket by their id
       if !Ticket.exists?(params[:id])
         redirect '/tickets'
-      elsif logged_in? && current_user.tickets.include?(@ticket)
+      elsif logged_in? && current_user.tickets.include?(Ticket.find(params[:id]))
         @ticket = Ticket.find(params[:id])
         erb :"/tickets/show"
       else
