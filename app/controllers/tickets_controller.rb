@@ -28,15 +28,15 @@ class TicketsController < ApplicationController
   end
 
   get "/tickets/:id" do #seeing single ticket by their id
-    @ticket = Ticket.find(params[:id])
-    if !@ticket
-      redirect '/tickets'
-    elsif logged_in? && current_user.tickets.include?(@ticket)
-      erb :"/tickets/show"
-    else
-      redirect '/tickets'
+      if !Ticket.exist?(params[:id])
+        redirect '/tickets'
+      elsif logged_in? && current_user.tickets.include?(@ticket)
+        @ticket = Ticket.find(params[:id])
+        erb :"/tickets/show"
+      else
+        redirect '/tickets'
+      end
     end
-  end
 
   get "/tickets/:id/edit" do #edit form for specific ticket
     @ticket = Ticket.find(params[:id])
