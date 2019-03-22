@@ -1,9 +1,13 @@
 class TicketsController < ApplicationController
 
   get "/tickets" do #ticket homepage
-    @user = User.find(session[:user_id])
-    @tickets = current_user.tickets
-    erb :"/tickets/index"
+    if logged_in?
+      @user = User.find(session[:user_id])
+      @tickets = current_user.tickets
+      erb :"/tickets/index"
+    else
+      redirect '/'
+    end
   end
 
   get "/tickets/new" do #see form to create new ticket
@@ -28,7 +32,7 @@ class TicketsController < ApplicationController
   end
 
   get "/tickets/:id" do #seeing single ticket by their id
-      if !Ticket.exist?(params[:id])
+      if !Ticket.exists?(params[:id])
         redirect '/tickets'
       elsif logged_in? && current_user.tickets.include?(@ticket)
         @ticket = Ticket.find(params[:id])
