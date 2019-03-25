@@ -1,6 +1,8 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
+<div class='flash'>
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+</div>
 
 <h2>Edit the <i><%=@ticket.movie_name%></i> ticket:</h2>
 
