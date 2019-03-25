@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+  use Rack::Flash
 
   get '/signup' do
     if logged_in?
@@ -39,6 +42,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
+      flash[:message] = "Successfully logged out."
       redirect to '/login'
     else
       redirect to '/'
