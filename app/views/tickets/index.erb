@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Tickets Homepage</h2>
 
 <a href='/tickets/new' id='create_link'>Create New Ticket</a>

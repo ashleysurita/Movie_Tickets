@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Create a new Movie Ticket</h2>
 
 <form action='/tickets' method='POST'>
