@@ -112,3 +112,9 @@
     line-height: 24px;
   }
 }
+
+/*------- Flash Message Style -------*/
+.flash{
+  background-color: yellow;
+  display: inline-block;
+}
