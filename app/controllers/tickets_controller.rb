@@ -20,13 +20,16 @@ class TicketsController < ApplicationController
 
   post "/tickets" do
     if params[:movie_name].empty? || params[:date].empty? || params[:movie_theater].empty?
+      flash[:message] = "Sorry, something is missing. Please try again."
       redirect '/tickets/new'
-    elsif Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater])
+    elsif Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater], :user_id => current_user.id)
+      flash[:message] = "This ticket has already been created."
       redirect "/tickets"
     else
       ticket = Ticket.new(params)
       ticket.user_id = session[:user_id]
       ticket.save
+      flash[:message] = "Successfully created ticket."
       redirect "/tickets/#{ticket.id}"
     end
   end
