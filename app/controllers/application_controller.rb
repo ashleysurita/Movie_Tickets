@@ -25,6 +25,17 @@ class ApplicationController < Sinatra::Base
     def current_user
        User.find(session[:user_id])
      end
+
+     def redir
+      if !logged_in?
+        redirect '/login'
+      end
+    end
+
+    def empty_form?
+      params.values.any?{|val| val.empty?}
+    end
+
    end
 
 end
