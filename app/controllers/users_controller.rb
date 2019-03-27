@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+    if empty_form?
+      redirect to '/signup'
+    elsif User.find_by(username: params[:username])
       redirect to '/signup'
     else
       @user = User.create(params)
