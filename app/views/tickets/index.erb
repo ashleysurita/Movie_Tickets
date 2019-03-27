@@ -2,7 +2,7 @@
 
 <a href='/tickets/new' id='create_link'>Create New Ticket</a>
 
-<h3>Welcome <%= @user.username.capitalize %>!</h3>
+<h3>Welcome <%= @tickets.first.user.username.capitalize %>!</h3>
 <br>
 <h4>Your Tickets:</h4>
 <br>
@@ -17,13 +17,11 @@
       </li>
 
       <form id='button' method="get" action="/tickets/<%= ticket.id %>"> 
-        <input id="hidden" type="hidden" name="_method" value="EDIT"> 
-        <input name='edit' type="submit" value="View Ticket"> 
+        <input type="submit" value="View Ticket"> 
       </form> 
 
       <form id='button' method="get" action="/tickets/<%= ticket.id %>/edit"> 
-        <input id="hidden" type="hidden" name="_method" value="EDIT"> 
-        <input name='edit' type="submit" value="Edit Ticket"> 
+        <input type="submit" value="Edit Ticket"> 
       </form> 
 
       <form id='button' method="post" action="/tickets/<%= ticket.id %>"> 
