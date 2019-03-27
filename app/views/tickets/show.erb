@@ -1,3 +1,9 @@
+<div class='flash'>
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+</div>
+
 <h2>Ticket for your upcoming movie:</h2>
 
 <h3><i><%=@ticket.movie_name%></i></h3>

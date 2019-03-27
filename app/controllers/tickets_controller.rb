@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class TicketsController < ApplicationController
+  use Rack::Flash
 
   get "/tickets" do #ticket homepage
     redir
@@ -13,13 +16,15 @@ class TicketsController < ApplicationController
 
   post "/tickets" do
     if empty_form?
+      flash[:message] = "Oops, something is missing! Please try again."
       redirect '/tickets/new'
     elsif Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater])
       redirect "/tickets"
     else
       current_user.tickets.build(params)
       ticket.save
-      redirect "/tickets/#{ticket.id}"
+      flash[:message] = "Successfully created ticket."
+      redirect to ("/tickets/#{ticket.id}")
     end
   end
 
@@ -48,10 +53,12 @@ class TicketsController < ApplicationController
   patch '/tickets/:id' do #edit route for specific ticket
     @ticket = Ticket.find(params[:id])
     if empty_form?
+      flash[:message] = "Oops, something is missing! Please try again."
       redirect "/tickets/#{params[:id]}/edit"
     elsif logged_in? && current_user.id == @ticket.user_id
       params.delete('_method')
       @ticket.update(params)
+      flash[:message] = "Successfully updated ticket."
       redirect to "/tickets/#{@ticket.id}"
     else
       redirect '/login'
@@ -63,8 +70,10 @@ class TicketsController < ApplicationController
     ticket = Ticket.find(params[:id])
     if logged_in? && current_user.id == ticket.user_id #check if user is logged_in and if the ticket belongs to user
       ticket.delete
+      flash[:message] = "Successfully deleted ticket."
       redirect '/tickets'
     elsif logged_in? #if user is only logged_in but ticket doesn't belong to user
+      flash[:message] = "Something went wrong, let's try something else!"
       redirect '/tickets'
     else #if user is not logged in
       redirect "/login"
