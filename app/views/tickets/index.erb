@@ -8,7 +8,7 @@
 
 <a href='/tickets/new' id='create_link'>Create New Ticket</a>
 
-<h3>Welcome <%= @tickets.first.user.username.capitalize %>!</h3>
+<h3>Welcome <%= current_user.username.capitalize %>!</h3><%# changed to current_user, b/c error if no tickets to call on %>
 <br>
 <h4>Your Tickets:</h4>
 <br>
