@@ -4,7 +4,6 @@ class TicketsController < ApplicationController
   use Rack::Flash
 
   get "/tickets" do #ticket homepage
-    redir
     @tickets = current_user.tickets
     erb :"/tickets/index"
   end
