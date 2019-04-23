@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
   use Rack::Flash
 
   get "/tickets" do #ticket homepage
+    redir
     @tickets = current_user.tickets
     erb :"/tickets/index"
   end
@@ -20,7 +21,6 @@ class TicketsController < ApplicationController
     elsif Ticket.find_by(:movie_name => params[:movie_name], :date => params[:date], :movie_theater => params[:movie_theater])
       redirect "/tickets"
     else
-      binding.pry
       ticket = current_user.tickets.build(params)
       ticket.save
       flash[:message] = "Successfully created ticket."
